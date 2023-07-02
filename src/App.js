@@ -3,6 +3,7 @@ import Main from "./Main";
 import Loader from "./Loader";
 import Error from "./Error";
 import StartScreen from "./StartScreen";
+import Question from "./Question";
 import { useEffect, useReducer } from "react";
 
 const initialState = {
@@ -20,6 +21,9 @@ function reducer(state, action) {
     case "dataFailed":
       return { ...state, status: "error" };
 
+    case "start":
+      return { ...state, status: "active" };
+
     default:
       throw new Error(`Action ${action.type} unknown`);
   }
@@ -32,6 +36,7 @@ export default function App() {
 
   useEffect(function () {
     fetch("http://localhost:8000/questions")
+      // fetch("https://my-json-server.typicode.com/cbhuber17/react-quiz-questions")
       .then((res) => res.json())
       .then((data) => dispatch({ type: "dataReceived", payload: data }))
       .catch((err) => dispatch({ type: "dataFailed" }));
@@ -44,7 +49,10 @@ export default function App() {
       <Main>
         {status === "loading" && <Loader />}
         {status === "error" && <Error />}
-        {status === "ready" && <StartScreen numQuestions={numQuestions} />}
+        {status === "ready" && (
+          <StartScreen numQuestions={numQuestions} dispatch={dispatch} />
+        )}
+        {status === "active" && <Question />}
       </Main>
     </div>
   );
