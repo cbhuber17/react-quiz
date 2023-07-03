@@ -92,8 +92,10 @@ export default function App() {
   const maxPoints = questions.reduce((prev, cur) => prev + cur.points, 0);
 
   useEffect(function () {
-    fetch("http://localhost:8000/questions")
-      // fetch("https://my-json-server.typicode.com/cbhuber17/react-quiz-questions")
+    // fetch("http://localhost:8000/questions") // dev
+    fetch(
+      "https://my-json-server.typicode.com/cbhuber17/react-quiz-db/questions"
+    ) // prod
       .then((res) => res.json())
       .then((data) => dispatch({ type: "dataReceived", payload: data }))
       .catch((err) => dispatch({ type: "dataFailed" }));
