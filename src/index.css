@@ -37,15 +37,24 @@ body {
 }
 
 .main {
-  width: 50rem;
+  @media (min-width: 700px) {
+    width: 50rem;
+  }
 }
 
 .app-header {
-  width: 66rem;
-  margin-bottom: 4rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  @media (min-width: 700px) {
+    width: 66rem;
+    margin-bottom: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  @media (max-width: 700px) {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    justify-items: center;
+  }
 }
 
 .error {
@@ -64,11 +73,13 @@ img {
 h1 {
   font-family: "Codystar";
   font-size: 5.6rem;
+  text-align: center;
 }
 
 h2 {
   font-size: 3.6rem;
   margin-bottom: 2rem;
+  text-align: center;
 }
 
 h3 {
