@@ -4,6 +4,7 @@ export default function Options({ question }) {
   const { dispatch, answer } = useQuizzes();
 
   const hasAnswered = answer !== null;
+  console.log(question);
 
   return (
     <div className="options">
